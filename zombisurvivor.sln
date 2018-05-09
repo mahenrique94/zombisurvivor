@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio for Mac
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zombisurvivor.Plugins", "zombisurvivor.Plugins.csproj", "{9C1D2C1B-1450-1FD8-0798-1D48D9F65A43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zombisurvivor", "zombisurvivor.csproj", "{C2FF241B-231D-41F4-C512-FE993802CA3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zombisurvivor.Editor.Plugins", "zombisurvivor.Editor.Plugins.csproj", "{7854047E-BD57-789D-BE86-BF535B384BE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C1D2C1B-1450-1FD8-0798-1D48D9F65A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C1D2C1B-1450-1FD8-0798-1D48D9F65A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C1D2C1B-1450-1FD8-0798-1D48D9F65A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C1D2C1B-1450-1FD8-0798-1D48D9F65A43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2FF241B-231D-41F4-C512-FE993802CA3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2FF241B-231D-41F4-C512-FE993802CA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2FF241B-231D-41F4-C512-FE993802CA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2FF241B-231D-41F4-C512-FE993802CA3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7854047E-BD57-789D-BE86-BF535B384BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7854047E-BD57-789D-BE86-BF535B384BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7854047E-BD57-789D-BE86-BF535B384BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7854047E-BD57-789D-BE86-BF535B384BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
