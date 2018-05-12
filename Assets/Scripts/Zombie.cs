@@ -6,8 +6,17 @@ using UnityEngine.AI;
 public class Zombie : MonoBehaviour {
 
     private NavMeshAgent agent;
+    [SerializeField]
+    private float attackInterval;
+    [SerializeField]
+    private float damage;
     private GameObject player;
-    private bool mustFollow = true;
+    private bool mustFollow = false;
+    private bool mustAttack = false;
+
+    public void follow() {
+        this.toggleMustFollow();
+    }
 
     private void initializeAttributes()
     {
@@ -17,10 +26,12 @@ public class Zombie : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         this.toggleMustFollow();
+        StartCoroutine(this.attack());
     }
 
     private void OnTriggerExit(Collider other) {
         this.toggleMustFollow();
+        StopCoroutine(this.attack());
     }
 
 	void Start () {
@@ -29,7 +40,12 @@ public class Zombie : MonoBehaviour {
 
     private void toggleMustFollow() {
         this.mustFollow = !this.mustFollow;
-        this.agent.isStopped = !this.mustFollow;
+        this.mustAttack = this.mustFollow;
+        this.agent.isStopped = this.mustFollow;
+    }
+
+    public void unFollow() {
+        this.toggleMustFollow();
     }
 	
 	void Update () {
@@ -37,5 +53,13 @@ public class Zombie : MonoBehaviour {
             this.agent.destination = this.player.transform.position;
         }
 	}
+
+    IEnumerator attack() {
+        Player player = this.player.GetComponent<Player>();
+        while (this.mustAttack) {
+            player.takeAttack(this.damage);
+            yield return new WaitForSeconds(this.attackInterval);
+        }
+    }
 
 }

@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{C2FF241B-231D-41F4-C512-FE993802CA3A}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Zombie.cs">
     <Files>
-      <File FileName="Assets/Scripts/Shot.cs" Line="27" Column="38" />
-      <File FileName="Assets/Scripts/Zombie.cs" Line="32" Column="49" />
+      <File FileName="Assets/Scripts/VisionField.cs" Line="11" Column="6" />
+      <File FileName="Assets/Scripts/Zombie.cs" Line="21" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
