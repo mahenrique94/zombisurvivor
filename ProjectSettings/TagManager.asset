@@ -7,6 +7,7 @@ TagManager:
   - BulletsUI
   - MunitionUI
   - HealthBar
+  - Zombie
   layers:
   - Default
   - TransparentFX

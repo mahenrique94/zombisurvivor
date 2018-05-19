@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Shot : MonoBehaviour {
 
+    private const string ANIMATION_REALOAD = "reload";
+    private const string ANIMATION_SHOT = "fire";
+
+    [SerializeField]
+    private Animator animator;
     [SerializeField]
     private int bullets;
     [SerializeField]
@@ -12,16 +17,33 @@ public class Shot : MonoBehaviour {
     private Text bulletsUI;
     private AudioSource bulletsSoundTrack;
     private GameObject cam;
+    private bool isReloading = false;
     [SerializeField]
     private int munition;
     private Text munitionUI;
 
-    private bool hasBulletsToReload(int bulletsToReload) {
+    private bool animationIsRunning(string name) {
+        return this.animator.GetCurrentAnimatorStateInfo(0).IsName(name);
+    }
+
+    private void animationRunOnce(string name) {
+        this.animator.CrossFadeInFixedTime(name, 0.1f);
+    }
+
+	private void FixedUpdate() {
+        this.isReloading = this.animationIsRunning(ANIMATION_REALOAD);
+	}
+
+	private bool hasBulletsToReload(int bulletsToReload) {
         return bulletsToReload <= this.munition;
     }
 
     private bool hasBulletsToShot() {
         return this.bullets > 0;
+    }
+
+    private bool hittedAZombie(RaycastHit hitted) {
+        return hitted.transform.CompareTag("Zombie");
     }
 
     private void initializeAttributes() {
@@ -51,16 +73,29 @@ public class Shot : MonoBehaviour {
             if (this.hasBulletsToReload(bulletsToReload)) {
                 this.bullets += bulletsToReload;
                 this.munition -= bulletsToReload;
+                this.realodingAnimation();
             }
         }
     }
 
+    private void realodingAnimation() {
+        if (this.animationIsRunning(ANIMATION_REALOAD)) {
+            return;
+        }
+        this.animationRunOnce(ANIMATION_REALOAD);
+    }
+
     private void shot() {
         if (this.shotted()) {
-            if (this.hasBulletsToShot()) {
+            if (this.hasBulletsToShot() && !this.isReloading) {
                 RaycastHit hitted;
                 this.bulletsSoundTrack.Play();
+                this.animationRunOnce(ANIMATION_SHOT);
 				if (Physics.Raycast(this.cam.transform.position, this.cam.transform.forward, out hitted)) {
+                    Debug.Log(hitted.transform.name);
+                    if (this.hittedAZombie(hitted)) {
+                        hitted.transform.gameObject.GetComponent<Zombie>().takeDamage(25);
+                    }
 					if (hitted.transform.gameObject.GetComponent<Rigidbody>()) {
 						Rigidbody rb = hitted.transform.gameObject.GetComponent<Rigidbody>();
 						rb.AddExplosionForce(250f, hitted.point, 10);

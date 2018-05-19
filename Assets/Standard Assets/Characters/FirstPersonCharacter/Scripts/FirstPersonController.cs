@@ -42,6 +42,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        [SerializeField]
+        private Animator animator;
+
         // Use this for initialization
         private void Start()
         {
@@ -61,6 +64,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+            this.animations();
+
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
@@ -255,5 +260,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+        private void animations() {
+            this.animator.SetBool("isWalking", this.isWalking());
+        }
+
+        private bool isWalking() {
+            return this.m_CharacterController.velocity.magnitude >= 0.15f;
+        }
+
     }
 }

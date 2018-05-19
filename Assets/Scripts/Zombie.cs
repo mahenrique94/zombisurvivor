@@ -7,12 +7,22 @@ public class Zombie : MonoBehaviour {
 
     private NavMeshAgent agent;
     [SerializeField]
+    private Animator animator;
+    [SerializeField]
     private float attackInterval;
     [SerializeField]
     private float damage;
-    private GameObject player;
+    private int life = 100;
     private bool mustFollow = false;
     private bool mustAttack = false;
+    private GameObject player;
+
+    private void died() {
+        if (this.life <= 0) {
+            this.animator.SetBool("died", true);
+            Destroy(gameObject, 3f);
+        }
+    }
 
     public void follow() {
         this.toggleMustFollow();
@@ -38,6 +48,10 @@ public class Zombie : MonoBehaviour {
         this.initializeAttributes();
 	}
 
+    public void takeDamage(int damage) {
+        this.life -= damage;
+    }
+
     private void toggleMustFollow() {
         this.mustFollow = !this.mustFollow;
         this.mustAttack = this.mustFollow;
@@ -52,6 +66,7 @@ public class Zombie : MonoBehaviour {
         if (mustFollow) {
             this.agent.destination = this.player.transform.position;
         }
+        this.died();
 	}
 
     IEnumerator attack() {
